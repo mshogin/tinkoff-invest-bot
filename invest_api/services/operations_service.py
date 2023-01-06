@@ -21,7 +21,7 @@ class OperationService:
         self.__token = token
         self.__app_name = app_name
 
-    def available_rub_on_account(self, account_id: str) -> Optional[Decimal]:
+    def available_rub_on_account(self, account_id: str) -> Decimal:
         """
         Return available amount of rub on account
         """
@@ -33,9 +33,9 @@ class OperationService:
                     logger.debug(f"Amount of RUB on account: {money}")
                     return moneyvalue_to_decimal(money)
 
-        return None
+        raise Exception("Amount is None")
 
-    def positions_securities(self, account_id: str) -> list[PositionsSecurities]:
+    def positions_securities(self, account_id: str) -> list[PositionsSecurities] | None:
         """
         :return: All open positions for account
         """
@@ -60,8 +60,8 @@ class OperationService:
     def __get_operations(
             self,
             account_id: str,
-            from_: datetime,
-            to_: datetime,
+            from_: datetime.datetime,
+            to_: datetime.datetime,
             state: OperationState,
             figi: str = ""
     ) -> list[Operation]:

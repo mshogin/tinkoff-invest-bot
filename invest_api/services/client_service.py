@@ -2,6 +2,7 @@ import logging
 from datetime import timedelta
 
 from tinkoff.invest import CandleInterval, Client, HistoricCandle
+from tinkoff.invest.typedefs import AccountId
 from tinkoff.invest.utils import now
 
 from invest_api.invest_error_decorators import invest_error_logging, invest_api_retry
@@ -54,6 +55,6 @@ class ClientService:
         logger.info(f"Cancel all orders for account id: {account_id}")
 
         with Client(self.__token, app_name=self.__app_name) as client:
-            client.cancel_all_orders(account_id=account_id)
+            client.cancel_all_orders(account_id=AccountId(account_id))
 
         logger.info(f"Cancellation all orders complete.")

@@ -20,7 +20,7 @@ class AccountService:
 
     @invest_api_retry()
     @invest_error_logging
-    def trading_account_id(self, account_settings: AccountSettings) -> str:
+    def trading_account_id(self, account_settings: AccountSettings) -> str | None:
         """
         Method returns appropriate account id for trading:
         Full rights, common type (avoid IIS etc), account is open and ready,

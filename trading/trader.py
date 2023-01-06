@@ -52,7 +52,7 @@ class Trader:
             account_id: str,
             trading_settings: TradingSettings,
             strategies: list[IStrategy],
-            trade_day_end_time: datetime,
+            trade_day_end_time: datetime.datetime,
             min_rub: int
     ) -> None:
         logger.info("Start preparations for trading today")
@@ -108,15 +108,15 @@ class Trader:
             account_id: str,
             trading_settings: TradingSettings,
             strategies: dict[str, IStrategy],
-            trade_day_end_time: datetime
+            trade_day_end_time: datetime.datetime
     ) -> None:
         logger.info(f"Subscribe and read Candles for {strategies.keys()}")
 
         # End trading before close trade session
-        trade_before_time: datetime = \
+        trade_before_time: datetime.datetime = \
             trade_day_end_time - datetime.timedelta(seconds=trading_settings.stop_trade_before_close)
 
-        signals_before_time: datetime = \
+        signals_before_time: datetime.datetime = \
             trade_day_end_time - datetime.timedelta(minutes=trading_settings.stop_signals_before_close)
         logger.debug(f"Stop time: signals - {signals_before_time}, trading - {trade_before_time}")
 

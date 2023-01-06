@@ -1,5 +1,6 @@
 import logging
 
+from typing import Optional
 from tinkoff.invest import Client, OrderDirection, Quotation, OrderType, PostOrderResponse, OrderState
 
 from invest_api.utils import generate_order_id
@@ -25,7 +26,7 @@ class OrderService:
             account_id: str,
             figi: str,
             count_lots: int,
-            price: Quotation,
+            price: Optional[Quotation],
             direction: OrderDirection,
             order_type: OrderType,
             order_id: str

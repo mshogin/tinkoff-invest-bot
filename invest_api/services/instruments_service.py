@@ -3,6 +3,7 @@ import logging
 
 from tinkoff.invest import Client, TradingSchedule, InstrumentIdType, InstrumentStatus
 
+from typing import Tuple
 from configuration.settings import ShareSettings
 from invest_api.invest_error_decorators import invest_error_logging, invest_api_retry
 from invest_api.utils import moex_exchange_name
@@ -20,7 +21,7 @@ class InstrumentService:
         self.__token = token
         self.__app_name = app_name
 
-    def moex_today_trading_schedule(self) -> (bool, datetime, datetime):
+    def moex_today_trading_schedule(self) -> Tuple[bool, datetime.datetime, datetime.datetime]:
         """
         :return: Information about trading day status, datetime trading day start, datetime trading day end
         (both on today)
@@ -42,8 +43,8 @@ class InstrumentService:
     def __trading_schedules(
             self,
             exchange: str,
-            _from: datetime,
-            _to: datetime
+            _from: datetime.datetime,
+            _to: datetime.datetime
     ) -> list[TradingSchedule]:
         result = []
 

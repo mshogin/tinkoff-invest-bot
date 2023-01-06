@@ -21,7 +21,7 @@ def invest_error_logging(func):
             # tracking_id = ex.metadata.tracking_id if ex.metadata else ""
             logger.error("AioRequestError code=%s repr=%s details=%s",
                          str(ex.code), repr(ex), ex.details)
-            raise 
+            raise
         except InvestError as ex:
             logger.error("InvestError repr=%s", repr(ex))
             raise
@@ -30,7 +30,7 @@ def invest_error_logging(func):
 
 
 # Decorator retries api requests for some kind of exceptions
-def invest_api_retry(retry_count: int = 3, exceptions: tuple = ( RequestError )):
+def invest_api_retry(retry_count: int = 3, exceptions: tuple = ( RequestError, )):
     def errors_retry(func):
 
         def errors_wrapper(*args, **kwargs):

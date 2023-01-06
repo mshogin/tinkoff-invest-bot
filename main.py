@@ -14,8 +14,9 @@ from invest_api.services.market_data_service import MarketDataService
 from invest_api.services.operations_service import OperationService
 from invest_api.services.orders_service import OrderService
 from invest_api.services.market_data_stream_service import MarketDataStreamService
+from trade_system.strategies.base_strategy import IStrategy
 from trade_system.strategies.strategy_factory import StrategyFactory
-from trading.trade_service import TradeService
+from trading.trade_service import TradeService, IStrategy
 
 # the configuration file name
 CONFIG_FILE = "settings.ini"
@@ -71,8 +72,10 @@ if __name__ == "__main__":
         if account_service.verify_token():
             logger.info(f"Blog settings: {config.blog_settings}")
 
-            trade_strategies = \
-                [StrategyFactory.new_factory(x.name, x) for x in config.trade_strategy_settings]
+            trade_strategies: list[IStrategy] = [
+                StrategyFactory.new_factory(x.name, x)
+                for x in config.trade_strategy_settings
+            ]
 
             # Queue to keep messages for TG. TradeService(via Blogger) produce, BlogWorker consume (send)
             messages_queue = asyncio.Queue()

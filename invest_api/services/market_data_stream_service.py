@@ -1,6 +1,6 @@
 import datetime
 import logging
-from typing import Generator
+from typing import AsyncGenerator
 
 from tinkoff.invest import Client, CandleInstrument, SubscriptionInterval, InfoInstrument, TradeInstrument, \
     MarketDataResponse, Candle, AsyncClient
@@ -24,7 +24,7 @@ class MarketDataStreamService:
     def start_candles_stream(
             self,
             figies: list[str],
-            trade_before_time: datetime
+            trade_before_time: datetime.datetime
     ) -> Generator[Candle, None, None]:
         """
         The method starts gRPC stream and return candles
@@ -62,8 +62,8 @@ class MarketDataStreamService:
     async def start_async_candles_stream(
             self,
             figies: list[str],
-            trade_before_time: datetime
-    ) -> Generator[Candle, None, None]:
+            trade_before_time: datetime.datetime
+    ) -> AsyncGenerator[Candle, None]:
         """
         The method starts async gRPC stream and return candles
         """

@@ -124,7 +124,7 @@ class TradeService:
         await TradeService.__sleep_to(next_time)
 
     @staticmethod
-    async def __sleep_to(next_time: datetime) -> None:
+    async def __sleep_to(next_time: datetime.datetime) -> None:
         now = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc)
 
         logger.debug(f"Sleep from {now} to {next_time}")
